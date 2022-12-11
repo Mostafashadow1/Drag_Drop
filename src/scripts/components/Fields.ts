@@ -1,13 +1,17 @@
-export class Fields {
-  private _template: HTMLTemplateElement;
-  private _hostElement: HTMLDivElement;
-  private _form: HTMLFormElement;
+import Base from "./Base.js";
+export class Fields extends Base<HTMLFormElement> {
   constructor() {
-    /* Render Template Fields  */
-    this._template = document.getElementById("fields")! as HTMLTemplateElement;
-    this._hostElement = document.getElementById("app")! as HTMLDivElement;
-    const templateContent = document.importNode(this._template.content, true);
-    this._form = templateContent.firstElementChild! as HTMLFormElement;
-    this._hostElement.insertAdjacentElement("afterbegin", this._form);
+    super("fields", "app", true, "form");
+    // add some text and render content
+    this.renderContent();
+  }
+  /** add some text in lable and show  */
+  renderContent(): void {
+    // target title lable and add text
+    const title = this.element.querySelector(".title-lable")!;
+    title.textContent = "title";
+    // target desc lable and add text
+    const description = this.element.querySelector(".desc-lable")!;
+    description.textContent = "description";
   }
 }

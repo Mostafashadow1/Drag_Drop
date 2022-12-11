@@ -1,4 +1,17 @@
+@use "../vars/radius" as *;
+@use "../vars/colors" as *;
 .projects {
   width: 400px;
   text-align: center;
+  margin: 10px;
+  .title-header {
+    background-color: $projects-header-c;
+    border-radius: $default-r;
+    padding: 10px;
+    .title {
+      font-weight: bold;
+      font-size: 23px;
+      text-transform: capitalize;
+    }
+  }
 }

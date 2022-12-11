@@ -10,22 +10,24 @@
   </head>
   <body>
     <template id="fields">
-      <form>
+      <form id="form">
         <div class="form-control">
-          <label for="title">title</label>
+          <label for="title" class="title-lable"></label>
           <input id="title" type="text" />
         </div>
         <div class="form-control">
-          <label for="desc">description</label>
+          <label for="desc" class="desc-lable"></label>
           <input id="desc" type="text" />
         </div>
         <button class="btn">add project</button>
       </form>
     </template>
-    <template id="list">
+    <template id="project-list">
       <div class="projects">
-        <h1 class="title"></h1>
-        <ul></ul>
+        <div class="title-header">
+          <h2 class="title"></h2>
+        </div>
+        <ul class="list-item"></ul>
       </div>
     </template>
     <div id="app"></div>

@@ -1,19 +1,16 @@
-export class ProjectsList {
+import Base from "./Base.js";
+export default class ProjectsList extends Base {
     constructor(_status) {
+        super("project-list", "app", false, `${_status}-projects`);
         this._status = _status;
-        this._template = document.getElementById("list");
-        this._hostElement = document.getElementById("app");
-        const templateContent = document.importNode(this._template.content, true);
-        this._projectsContainer =
-            templateContent.firstElementChild;
-        this.renderProjectListsSpecific();
-        this._hostElement.insertAdjacentElement("beforeend", this._projectsContainer);
+        this.renderContent();
     }
-    renderProjectListsSpecific() {
-        const list = this._projectsContainer.querySelector("ul");
-        const title = this._projectsContainer.querySelector(".title");
-        list.classList.add(`${this._status}-list`);
-        title.textContent = `${this._status} Projects`;
+    renderContent() {
+        const title = this.element.querySelector(".title");
+        title.textContent = `${this._status} projects`;
+        const listItem = this.element.querySelector(".list-item");
+        const listId = `${this._status}-list-item`;
+        listItem.id = listId;
     }
 }
 //# sourceMappingURL=ProjectsList.js.map

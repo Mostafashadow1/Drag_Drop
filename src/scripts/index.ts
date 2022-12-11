@@ -1,9 +1,8 @@
 import { Fields } from "./components/Fields.js";
-import { ProjectsList } from "./components/ProjectsList.js";
-/* render some elements in HTML
-1) Fields inputs
-2) List Projects
-*/
+import ProjectsList from "./components/ProjectsList.js";
+/* render some elements in HTML*/
+// Fields inputs
 new Fields();
-new ProjectsList("Active");
-new ProjectsList("Finished");
+// List Projects
+new ProjectsList("active");
+new ProjectsList("finished");
