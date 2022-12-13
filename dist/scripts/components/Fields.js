@@ -24,15 +24,23 @@ export class Fields extends Base {
     }
     _validateInputsValue(titleValue, descValue) {
         const [titleValid, descValid] = assignValidateInputs(titleValue, descValue);
-        handleValidationErrors(titleValid, descValid);
-        console.log(titleValid, descValid);
+        const titleErrorMsg = handleValidationErrors(titleValid);
+        const descErrorMsg = handleValidationErrors(descValid);
+        if (titleErrorMsg.length) {
+            alert(titleErrorMsg);
+        }
+        else if (descErrorMsg.length) {
+            alert(descErrorMsg);
+        }
+        return true;
     }
     _handleAddProject(e) {
         e.preventDefault();
         const [titleInput, descInput] = this._targetInputs();
         const [titleValue, descValue] = this._getValueInputs(titleInput, descInput);
-        this._validateInputsValue(titleValue, descValue);
-        console.log(titleValue, descValue);
+        if (this._validateInputsValue(titleValue, descValue)) {
+            console.log(titleValue, descValue);
+        }
     }
     _addProject() {
         this.element.addEventListener("submit", this._handleAddProject.bind(this));

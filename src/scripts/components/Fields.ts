@@ -39,9 +39,19 @@ export class Fields extends Base<HTMLFormElement> {
 
   /*validate inputs values*/
   private _validateInputsValue(titleValue: string, descValue: string) {
+    // send title value and desc value to process and get result
     const [titleValid, descValid] = assignValidateInputs(titleValue, descValue);
-    handleValidationErrors(titleValid, descValid);
-    console.log(titleValid, descValid);
+    // send title valid  process and get error message
+    const titleErrorMsg = handleValidationErrors(titleValid);
+    // send desc valid  process and get error message
+    const descErrorMsg = handleValidationErrors(descValid);
+    // cheack is found error message ? return error : return true : mean values are valid
+    if (titleErrorMsg.length) {
+      alert(titleErrorMsg);
+    } else if (descErrorMsg.length) {
+      alert(descErrorMsg);
+    }
+    return true;
   }
 
   /* handle add project */
@@ -51,9 +61,10 @@ export class Fields extends Base<HTMLFormElement> {
     const [titleInput, descInput] = this._targetInputs();
     // get value inputs
     const [titleValue, descValue] = this._getValueInputs(titleInput, descInput);
-    // validate inputs
-    this._validateInputsValue(titleValue, descValue);
-    console.log(titleValue, descValue);
+    // validate inputs values are Valid ? compleate process : stop
+    if (this._validateInputsValue(titleValue, descValue)) {
+      console.log(titleValue, descValue);
+    }
   }
 
   /*supmit project  'add project'*/
