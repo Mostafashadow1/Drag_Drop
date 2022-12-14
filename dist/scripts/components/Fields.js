@@ -3,10 +3,10 @@ import { assignValidateInputs, handleValidationErrors, } from "../utils/validati
 export class Fields extends Base {
     constructor() {
         super("fields", "app", true, "form");
-        this.renderContent();
+        this._targetElementAndAddText();
         this._addProject();
     }
-    renderContent() {
+    _targetElementAndAddText() {
         const title = this.element.querySelector(".title-lable");
         title.textContent = "title";
         const description = this.element.querySelector(".desc-lable");
