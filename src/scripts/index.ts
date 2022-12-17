@@ -4,5 +4,6 @@ import ProjectsList from "./components/ProjectsList.js";
 // Fields inputs
 new Fields();
 // List Projects
+new ProjectsList("intial"); 
 new ProjectsList("active");
 new ProjectsList("finished");

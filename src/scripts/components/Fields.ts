@@ -42,11 +42,12 @@ export class Fields extends Base<HTMLFormElement> {
     const descValue = descInput.value;
     return [titleValue, descValue];
   }
+
   /**
    * @desc takes params and validation these.
-   * @param titleValue : string
-   * @param  descValue : string
-   * @returns:
+   * @param1 titleValue : string
+   * @param2  descValue : string
+   * @return:
    *         ? is valid return true else return error
    */
   private _validateInputsValue(titleValue: string, descValue: string) {
@@ -60,12 +61,10 @@ export class Fields extends Base<HTMLFormElement> {
     }
     return true;
   }
-
-  /** 
+  /**
    * @desc handle project to add
-   * @param e : Event 
-   * todo i will compleate this function
-  */
+   * ToDo I will compleate this function
+   */
   private _handleAddProject(e: Event): void {
     e.preventDefault();
     const [titleInput, descInput] = this._targetInputs();
@@ -74,11 +73,12 @@ export class Fields extends Base<HTMLFormElement> {
       console.log(titleValue, descValue);
     }
   }
-  
+
   /**
    * @desc finaly add project after submit form
    */
   private _addProject(): void {
     this.element.addEventListener("submit", this._handleAddProject.bind(this));
+    // TODO i will remove lisnter
   }
 }

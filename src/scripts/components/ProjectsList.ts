@@ -1,6 +1,6 @@
 import Base from "./Base.js";
 export default class ProjectsList extends Base<HTMLDivElement> {
-  constructor(private _status: "active" | "finished") {
+  constructor(private _status: "intial" | "active" | "finished") {
     super("project-list", "app", false, `${_status}-projects`);
     this._renderProjectsList();
   }
