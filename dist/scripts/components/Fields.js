@@ -1,6 +1,6 @@
 import Base from "./Base.js";
 import { assignValidateInputs, handleValidationErrors, } from "../utils/validation-helper-fun.js";
-export class Fields extends Base {
+export default class Fields extends Base {
     constructor() {
         super("fields", "app", true, "form");
         this._targetElementAndAddText();
@@ -26,11 +26,15 @@ export class Fields extends Base {
         const [titleValid, descValid] = assignValidateInputs(titleValue, descValue);
         const titleErrorMsg = handleValidationErrors(titleValid);
         const descErrorMsg = handleValidationErrors(descValid);
+        const popup = document.querySelector(".popup_container");
+        const descPopup = document.querySelector(".desc_popup");
         if (titleErrorMsg.length) {
-            alert(titleErrorMsg);
+            popup.classList.add("visible_popup");
+            descPopup.textContent = titleErrorMsg;
         }
         else if (descErrorMsg.length) {
-            alert(descErrorMsg);
+            popup.classList.add("visible_popup");
+            descPopup.textContent = descErrorMsg;
         }
         return true;
     }

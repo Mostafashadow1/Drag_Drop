@@ -37,14 +37,14 @@ export const handleValidationErrors = (inputValid: validationInputs) => {
     errorMsg = `${inputValid.type} is required`;
   }
   // min Length
-  if (
+  else if (
     inputValid.minLength &&
     inputValid.minLength > inputValid.value.trim().length
   ) {
     errorMsg = `${inputValid.type} must be at least ${inputValid.minLength} characters`;
   }
   // max Length
-  if (
+  else if (
     inputValid.maxLength &&
     inputValid.maxLength < inputValid.value.trim().length
   ) {

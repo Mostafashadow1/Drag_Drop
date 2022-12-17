@@ -7,17 +7,21 @@
   z-index: 9999;
   display: grid;
   place-items: center;
+  display: none;
+
   .popup {
     min-width: 270px;
-    max-width: 300px;
+    max-width: 200px;
     border-radius: $medium-r;
     background-color: $bg-main-c;
-    padding: 10px;
+    padding: 3px 10px 10px 10px;
     .header {
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid $border-c;
-      .icon-close {
+      color: $error-c;
+
+      .close {
         border-width: 0;
         background-color: initial;
         cursor: pointer;
@@ -27,7 +31,7 @@
         display: grid;
         place-items: center;
         &:hover {
-          color: tomato;
+          color: $error-c;
         }
         &:after {
           content: "\00d7";
@@ -40,11 +44,16 @@
     }
     .content {
       padding: 14px 0px;
-      p {
+      .desc_popup {
         font-size: 14px;
         width: 100%;
         color: $text-second-c;
+        color: $error-c;
       }
     }
   }
+}
+
+.visible_popup {
+  display: grid !important;
 }

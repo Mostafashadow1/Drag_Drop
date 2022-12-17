@@ -3,7 +3,7 @@ import {
   assignValidateInputs,
   handleValidationErrors,
 } from "../utils/validation-helper-fun.js";
-export class Fields extends Base<HTMLFormElement> {
+export default class Fields extends Base<HTMLFormElement> {
   constructor() {
     super("fields", "app", true, "form");
     this._targetElementAndAddText();
@@ -48,16 +48,20 @@ export class Fields extends Base<HTMLFormElement> {
    * @param1 titleValue : string
    * @param2  descValue : string
    * @return:
-   *         ? is valid return true else return error
+   *         ? is valid return true else return error in popup
    */
   private _validateInputsValue(titleValue: string, descValue: string) {
     const [titleValid, descValid] = assignValidateInputs(titleValue, descValue);
     const titleErrorMsg = handleValidationErrors(titleValid);
     const descErrorMsg = handleValidationErrors(descValid);
+    const popup = document.querySelector(".popup_container")!;
+    const descPopup = document.querySelector(".desc_popup")!;
     if (titleErrorMsg.length) {
-      alert(titleErrorMsg);
+      popup.classList.add("visible_popup");
+      descPopup.textContent = titleErrorMsg;
     } else if (descErrorMsg.length) {
-      alert(descErrorMsg);
+      popup.classList.add("visible_popup");
+      descPopup.textContent = descErrorMsg;
     }
     return true;
   }
