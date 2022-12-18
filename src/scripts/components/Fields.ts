@@ -3,6 +3,7 @@ import {
   assignValidateInputs,
   handleValidationErrors,
 } from "../utils/validation-helper-fun.js";
+import { autoBind } from "../decorators/autoBind.js";
 export default class Fields extends Base<HTMLFormElement> {
   constructor() {
     super("fields", "app", true, "form");
@@ -65,10 +66,12 @@ export default class Fields extends Base<HTMLFormElement> {
     }
     return true;
   }
+
   /**
-   * @desc handle project to add
+   * @desc handle project to add in that use auto bind decorators to resolve problem this keyword.
    * ToDo I will compleate this function
    */
+  @autoBind
   private _handleAddProject(e: Event): void {
     e.preventDefault();
     const [titleInput, descInput] = this._targetInputs();
@@ -82,7 +85,7 @@ export default class Fields extends Base<HTMLFormElement> {
    * @desc finaly add project after submit form
    */
   private _addProject(): void {
-    this.element.addEventListener("submit", this._handleAddProject.bind(this));
-    // TODO i will remove lisnter
+    this.element.addEventListener("submit", this._handleAddProject);
+    this.element.removeEventListener("submit", this._handleAddProject);
   }
 }
