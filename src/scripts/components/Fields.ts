@@ -4,13 +4,13 @@ import {
   handleValidationErrors,
 } from "../utils/validation-helper-fun.js";
 import { autoBind } from "../decorators/autoBind.js";
+import { projectState } from "../data/ProjectState.js";
 export default class Fields extends Base<HTMLFormElement> {
   constructor() {
     super("fields", "app", true, "form");
     this._targetElementAndAddText();
     this._addProject();
   }
-
   /**
    * @desc this function target lables "title and desc" and add some text
    */
@@ -21,6 +21,27 @@ export default class Fields extends Base<HTMLFormElement> {
     description.textContent = "description";
   }
   /**
+   * @desc finaly add project after submit form
+   */
+  private _addProject(): void {
+    this.element.addEventListener("submit", this._handleAddProject);
+    this.element.removeEventListener("submit", this._handleAddProject);
+  }
+  /**
+   * @desc handle project to add in that use auto bind decorators to resolve problem this keyword.
+   *
+   */
+  @autoBind
+  private _handleAddProject(e: Event): void {
+    e.preventDefault();
+    const [titleInput, descInput] = this._targetInputs();
+    const [titleValue, descValue] = this._getValueInputs(titleInput, descInput);
+    if (this._validateInputsValue(titleValue, descValue)) {
+      projectState.createProject(titleValue, descValue); // * add project in global state
+      this._clearInputs(titleInput, descInput);
+    }
+  }
+  /**
    * @desc target inputs "title and desc" and return
    * @returns inputs [title , description]
    */
@@ -29,6 +50,7 @@ export default class Fields extends Base<HTMLFormElement> {
     const descInput = document.getElementById("desc")! as HTMLInputElement;
     return [titleInput, descInput];
   }
+
   /**
    * @desc take params and return values
    * @param titleInput : HTMLInputElement
@@ -43,7 +65,6 @@ export default class Fields extends Base<HTMLFormElement> {
     const descValue = descInput.value;
     return [titleValue, descValue];
   }
-
   /**
    * @desc takes params and validation these.
    * @param1 titleValue : string
@@ -60,32 +81,24 @@ export default class Fields extends Base<HTMLFormElement> {
     if (titleErrorMsg.length) {
       popup.classList.add("visible_popup");
       descPopup.textContent = titleErrorMsg;
+      return false;
     } else if (descErrorMsg.length) {
       popup.classList.add("visible_popup");
       descPopup.textContent = descErrorMsg;
+      return false;
     }
     return true;
   }
-
   /**
-   * @desc handle project to add in that use auto bind decorators to resolve problem this keyword.
-   * ToDo I will compleate this function
+   * @desc clear inputs values
+   * @param1 title input : HTMLInputElement
+   * @param2 descraption input : HTMLInputElement
    */
-  @autoBind
-  private _handleAddProject(e: Event): void {
-    e.preventDefault();
-    const [titleInput, descInput] = this._targetInputs();
-    const [titleValue, descValue] = this._getValueInputs(titleInput, descInput);
-    if (this._validateInputsValue(titleValue, descValue)) {
-      console.log(titleValue, descValue);
-    }
-  }
-
-  /**
-   * @desc finaly add project after submit form
-   */
-  private _addProject(): void {
-    this.element.addEventListener("submit", this._handleAddProject);
-    this.element.removeEventListener("submit", this._handleAddProject);
+  private _clearInputs(
+    titleInput: HTMLInputElement,
+    descInput: HTMLInputElement
+  ): void {
+    titleInput.value = "";
+    descInput.value = "";
   }
 }

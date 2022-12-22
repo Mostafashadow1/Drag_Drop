@@ -5,7 +5,7 @@ export default class extends Base<HTMLDivElement> {
     this._closePopup();
   }
 
-  /**sd
+  /**
    * @desc Close the error popup
    */
   private _closePopup() {

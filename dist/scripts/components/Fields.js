@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import Base from "./Base.js";
 import { assignValidateInputs, handleValidationErrors, } from "../utils/validation-helper-fun.js";
 import { autoBind } from "../decorators/autoBind.js";
+import { projectState } from "../data/ProjectState.js";
 export default class Fields extends Base {
     constructor() {
         super("fields", "app", true, "form");
@@ -18,6 +19,19 @@ export default class Fields extends Base {
         title.textContent = "title";
         const description = this.element.querySelector(".desc-lable");
         description.textContent = "description";
+    }
+    _addProject() {
+        this.element.addEventListener("submit", this._handleAddProject);
+        this.element.removeEventListener("submit", this._handleAddProject);
+    }
+    _handleAddProject(e) {
+        e.preventDefault();
+        const [titleInput, descInput] = this._targetInputs();
+        const [titleValue, descValue] = this._getValueInputs(titleInput, descInput);
+        if (this._validateInputsValue(titleValue, descValue)) {
+            projectState.createProject(titleValue, descValue);
+            this._clearInputs(titleInput, descInput);
+        }
     }
     _targetInputs() {
         const titleInput = document.getElementById("title");
@@ -38,24 +52,18 @@ export default class Fields extends Base {
         if (titleErrorMsg.length) {
             popup.classList.add("visible_popup");
             descPopup.textContent = titleErrorMsg;
+            return false;
         }
         else if (descErrorMsg.length) {
             popup.classList.add("visible_popup");
             descPopup.textContent = descErrorMsg;
+            return false;
         }
         return true;
     }
-    _handleAddProject(e) {
-        e.preventDefault();
-        const [titleInput, descInput] = this._targetInputs();
-        const [titleValue, descValue] = this._getValueInputs(titleInput, descInput);
-        if (this._validateInputsValue(titleValue, descValue)) {
-            console.log(titleValue, descValue);
-        }
-    }
-    _addProject() {
-        this.element.addEventListener("submit", this._handleAddProject);
-        this.element.removeEventListener("submit", this._handleAddProject);
+    _clearInputs(titleInput, descInput) {
+        titleInput.value = "";
+        descInput.value = "";
     }
 }
 __decorate([
