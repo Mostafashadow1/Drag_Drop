@@ -1,11 +1,12 @@
-import { projectState } from "../data/ProjectState.js";
+import { projectState } from "../store/ProjectState.js";
+import { Project } from "./Project.js";
 import Base from "./Base.js";
 export default class ProjectsList extends Base<HTMLDivElement> {
-  private _projects: any[] = []; // add that beacuse in want to  Clone projects from projectsState
+  private _projects: Project[] = []; // add that beacuse in want to  Clone projects from projectsState
   constructor(private _status: "intial" | "active" | "finished") {
     super("project-list", "app", false, `${_status}-projects`);
     this._renderProjectsList();
-    projectState.addLisner((projects: any[]) => {
+    projectState.addListener((projects: Project[]) => {
       this._projects = projects;
       this._renderProjects();
     });
@@ -21,7 +22,6 @@ export default class ProjectsList extends Base<HTMLDivElement> {
     const listId = `${this._status}-projects-list`;
     listItem.id = listId;
   }
-
   /**
    * @desc render projects in project list
    */

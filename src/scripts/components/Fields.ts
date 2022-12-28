@@ -4,7 +4,7 @@ import {
   handleValidationErrors,
 } from "../utils/validation-helper-fun.js";
 import { autoBind } from "../decorators/autoBind.js";
-import { projectState } from "../data/ProjectState.js";
+import { projectState } from "../store/ProjectState.js";
 export default class Fields extends Base<HTMLFormElement> {
   constructor() {
     super("fields", "app", true, "form");

@@ -1,4 +1,4 @@
-import { projectState } from "../data/ProjectState.js";
+import { projectState } from "../store/ProjectState.js";
 import Base from "./Base.js";
 export default class ProjectsList extends Base {
     constructor(_status) {
@@ -6,7 +6,7 @@ export default class ProjectsList extends Base {
         this._status = _status;
         this._projects = [];
         this._renderProjectsList();
-        projectState.addLisner((projects) => {
+        projectState.addListener((projects) => {
             this._projects = projects;
             this._renderProjects();
         });

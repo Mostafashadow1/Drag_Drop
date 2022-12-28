@@ -1,7 +1,9 @@
+import { Project } from "../components/Project.js";
+import { projectStatus } from "../utils/project-status.js";
 export default class ProjectState {
   private static _instance: ProjectState;
-  private _projects: any[] = [];
-  private _lisners: any[] = [];
+  private _projects: Project[] = [];
+  private _listeners: any[] = [];
   private constructor() {}
   /**
    * @desc create singleton instance of ProjectState
@@ -20,29 +22,29 @@ export default class ProjectState {
    * @param2 description project : string
    *  */
   public createProject(title: string, description: string): void {
-    const newProject = {
-      id: Math.random().toString(),
+    const newProject = new Project(
+      Math.random().toString(),
       title,
       description,
-    };
+      projectStatus.Intial
+    );
     this._projects.push(newProject);
-    this._runLisners();
+    this._runListeners();
   }
-
   /**
    * @desc Run all lisners function and pass projects into them
    */
-  private _runLisners(): void {
-    for (const lisner of this._lisners) {
-      lisner([...this._projects]);
+  private _runListeners(): void {
+    for (const listener of this._listeners) {
+      listener([...this._projects]);
     }
   }
   /**
-   * @desc  add lisner in linsers array , when create project
-   * @param lisner : Function
+   * @desc push lisner function in lisners array to get all projects snapshot
+   * @param listener : Function
    */
-  public addLisner(lisner: Function): void {
-    this._lisners.push(lisner);
+  public addListener(listener: Function): void {
+    this._listeners.push(listener);
   }
 }
 export const projectState = ProjectState.getInstance();

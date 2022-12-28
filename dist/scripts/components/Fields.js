@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import Base from "./Base.js";
 import { assignValidateInputs, handleValidationErrors, } from "../utils/validation-helper-fun.js";
 import { autoBind } from "../decorators/autoBind.js";
-import { projectState } from "../data/ProjectState.js";
+import { projectState } from "../store/ProjectState.js";
 export default class Fields extends Base {
     constructor() {
         super("fields", "app", true, "form");
