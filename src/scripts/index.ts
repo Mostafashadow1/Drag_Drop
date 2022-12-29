@@ -5,7 +5,7 @@ import Popup from "./components/Popup.js";
 // Fields inputs
 new Fields();
 // List Projects
-new ProjectsList("intial");
+new ProjectsList("initial");
 new ProjectsList("active");
 new ProjectsList("finished");
 // Popup

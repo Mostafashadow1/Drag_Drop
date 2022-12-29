@@ -1,8 +1,8 @@
-import { Project } from "../components/Project.js";
+import { ProjectTypes } from "../types/ProjectTypes.js";
 import { projectStatus } from "../utils/project-status.js";
 export default class ProjectState {
   private static _instance: ProjectState;
-  private _projects: Project[] = [];
+  private _projects: ProjectTypes[] = [];
   private _listeners: any[] = [];
   private constructor() {}
   /**
@@ -22,11 +22,11 @@ export default class ProjectState {
    * @param2 description project : string
    *  */
   public createProject(title: string, description: string): void {
-    const newProject = new Project(
+    const newProject = new ProjectTypes(
       Math.random().toString(),
       title,
       description,
-      projectStatus.Intial
+      projectStatus.Initial
     );
     this._projects.push(newProject);
     this._runListeners();

@@ -1,4 +1,4 @@
-import { Project } from "../components/Project.js";
+import { ProjectTypes } from "../types/ProjectTypes.js";
 import { projectStatus } from "../utils/project-status.js";
 export default class ProjectState {
     constructor() {
@@ -13,7 +13,7 @@ export default class ProjectState {
         return this._instance;
     }
     createProject(title, description) {
-        const newProject = new Project(Math.random().toString(), title, description, projectStatus.Intial);
+        const newProject = new ProjectTypes(Math.random().toString(), title, description, projectStatus.Initial);
         this._projects.push(newProject);
         this._runListeners();
     }

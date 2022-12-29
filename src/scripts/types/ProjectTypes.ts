@@ -1,6 +1,5 @@
-import { projectStatus } from "../utils/project-status";
-
-export class Project {
+import { projectStatus } from "../utils/project-status.js";
+export class ProjectTypes {
   constructor(
     public id: string,
     public title: string,
