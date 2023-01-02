@@ -2,11 +2,13 @@ import Base from "./Base.js";
 import { projectState } from "../store/ProjectState.js";
 import { ProjectTypes } from "../types/ProjectTypes.js";
 import { projectStatus } from "../utils/project-status.js";
+import Project from "./Project.js";
 export default class ProjectsList extends Base<HTMLDivElement> {
-  private _projects: ProjectTypes[] = []; // add that beacuse in want to  Clone projects from projectsState
+  private _projects: ProjectTypes[] = []; // * add that beacuse in want to  Clone projects from projectsState
   constructor(private _status: "initial" | "active" | "finished") {
     super("project-list", "app", false, `${_status}-projects`);
     this._renderProjectsList();
+    //  get Projects from  proejct state
     projectState.addListener((projects: ProjectTypes[]) => {
       const projectsAfterFilter = this._filterProjectsStatus(projects);
       this._projects = projectsAfterFilter;
@@ -33,23 +35,8 @@ export default class ProjectsList extends Base<HTMLDivElement> {
     )! as HTMLUListElement;
     projectList.innerHTML = ""; // * don't show old projects again after add new project
     for (const project of this._projects) {
-      const content = this._createProjectEle(project);
-      projectList.innerHTML += content;
+      new Project(`${this._status}-projects-list`, project);
     }
-  }
-
-  /**
-   * @desc create project elements and add content into them
-   * @param project : ProjectTypes
-   * @return project element and content
-   */
-  private _createProjectEle(project: ProjectTypes): any {
-    const content = `
-    <div class="project" draggable="true">
-    <h2 class="project_title" id="project_title">${project.title}</h2>
-    <p class="projec_desc" id="project_desc">${project.descraption}</p>
-    </div>`;
-    return content;
   }
   /**
    * @desc take project from state and filter that specific project Status add them in projects array to render

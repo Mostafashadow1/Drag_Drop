@@ -6,7 +6,7 @@ export default class Base<T extends HTMLElement> {
     private _templateId: string,
     private _hostId: string,
     private _postionElementStart: boolean,
-    private _elementId: string
+    private _elementId: string // * add this id  in element
   ) {
     const [template, _] = this._targetElements(this._templateId, this._hostId);
     // * Get template content

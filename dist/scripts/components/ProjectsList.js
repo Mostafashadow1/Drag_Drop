@@ -1,6 +1,7 @@
 import Base from "./Base.js";
 import { projectState } from "../store/ProjectState.js";
 import { projectStatus } from "../utils/project-status.js";
+import Project from "./Project.js";
 export default class ProjectsList extends Base {
     constructor(_status) {
         super("project-list", "app", false, `${_status}-projects`);
@@ -24,17 +25,8 @@ export default class ProjectsList extends Base {
         const projectList = document.getElementById(`${this._status}-projects-list`);
         projectList.innerHTML = "";
         for (const project of this._projects) {
-            const content = this._createProjectEle(project);
-            projectList.innerHTML += content;
+            new Project(`${this._status}-projects-list`, project);
         }
-    }
-    _createProjectEle(project) {
-        const content = `
-    <div class="project" draggable="true">
-    <h2 class="project_title" id="project_title">${project.title}</h2>
-    <p class="projec_desc" id="project_desc">${project.descraption}</p>
-    </div>`;
-        return content;
     }
     _filterProjectsStatus(projects) {
         const filterProjects = projects.filter((project) => {
