@@ -1,0 +1,22 @@
+@use "../vars/colors" as *;
+.project {
+  background-color: $bg-project-c;
+  margin: 5px 0;
+  border-radius: 6px;
+  padding: 10px;
+  color: $text-second-c;
+
+  .project_title {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+    word-wrap: break-word;
+    text-align: center;
+    color: inherit;
+  }
+  .project_desc {
+    border: 1px solid $border-c;
+    margin: 5px 0px;
+    color: inherit;
+  }
+}
