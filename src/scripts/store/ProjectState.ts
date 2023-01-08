@@ -1,9 +1,10 @@
+import { ListnerTypes } from "../types/ListnerTypes.js";
 import { ProjectTypes } from "../types/ProjectTypes.js";
 import { projectStatus } from "../utils/project-status.js";
 export default class ProjectState {
   private static _instance: ProjectState;
   private _projects: ProjectTypes[] = [];
-  private _listeners: any[] = [];
+  private _listeners: ListnerTypes[] = [];
   private constructor() {}
   /**
    * @desc create singleton instance of ProjectState
@@ -43,7 +44,7 @@ export default class ProjectState {
    * @desc push lisner function in lisners array to get all projects snapshot
    * @param listener : Function
    */
-  public addListener(listener: Function): void {
+  public addListener(listener: ListnerTypes): void {
     this._listeners.push(listener);
   }
 }
